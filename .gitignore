@@ -1,0 +1,41 @@
+# Python Virtual Environments
+backend/.venv/
+backend/venv/
+backend/env/
+.venv/
+venv/
+env/
+
+# Python Cache & Builds
+**/__pycache__/
+**/*.pyc
+**/*.pyo
+**/*.pyd
+.pytest_cache/
+.mypy_cache/
+
+# Local Configurations & API Keys (Critical to keep off GitHub!)
+backend/.env
+.env
+*.env.local
+
+# Databases & Vector Stores (Contains ChromaDB/SQLite local binaries & session logs)
+backend/chroma_db/
+backend/chroma_db/*.db
+backend/chroma_db/*.sqlite
+
+# User Uploaded Study Materials (PDF files)
+backend/uploads/
+uploads/
+
+# Frontend Dependency & Build folders
+frontend/node_modules/
+frontend/dist/
+frontend/dist-ssr/
+
+# OS and IDE Files
+.vscode/
+.idea/
+.DS_Store
+Thumbs.db
+*.log
