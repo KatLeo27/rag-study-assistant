@@ -1,6 +1,6 @@
 import React, { useRef, useState } from 'react';
 import { Upload, FileText, Loader2, AlertCircle, RefreshCw, Flame, Award, Zap, Compass, Trophy, CheckCircle2, ListTodo, Plus, Trash2, LogOut } from 'lucide-react';
-import type { SubjectTheme } from '../App';
+import { SubjectTheme, API_BASE } from '../App';
 
 interface DocumentSidebarProps {
   documents: string[];
@@ -68,7 +68,7 @@ export const DocumentSidebar: React.FC<DocumentSidebarProps> = ({
     formData.append('subject', currentSubject);
 
     try {
-      const response = await fetch('http://localhost:8000/api/upload', {
+      const response = await fetch(`${API_BASE}/api/upload`, {
         method: 'POST',
         headers: {
           'Authorization': `Bearer ${token}`

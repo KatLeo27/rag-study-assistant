@@ -5,6 +5,12 @@ import type { Message } from './components/ChatInterface';
 import { Trophy, Sun, Moon, GraduationCap, Lightbulb, TrendingUp, ArrowRight, Lock, User } from 'lucide-react';
 import { LandingPage } from './components/LandingPage';
 
+// Dynamically determine the correct API base URL
+export const API_BASE = import.meta.env.VITE_API_URL || 
+  (window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1'
+    ? 'http://localhost:8000'
+    : 'https://rag-study-assistant-1mm0.onrender.com');
+
 export interface SubjectTheme {
   accent: string;
   bg: string;
@@ -55,7 +61,7 @@ function LoginScreen({
     setLoading(true);
     const endpoint = isRegister ? 'register' : 'login';
     try {
-      const response = await fetch(`http://localhost:8000/api/auth/${endpoint}`, {
+      const response = await fetch(`${API_BASE}/api/auth/${endpoint}`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ username: name, password }),
@@ -534,7 +540,7 @@ function App() {
   const fetchSubjects = async () => {
     if (!token) return;
     try {
-      const response = await fetch('http://localhost:8000/api/subjects', {
+      const response = await fetch(`${API_BASE}/api/subjects`, {
         headers: { 'Authorization': `Bearer ${token}` }
       });
       if (response.ok) {
@@ -555,7 +561,7 @@ function App() {
     if (!token) return;
     setIsDocsLoading(true);
     try {
-      const response = await fetch(`http://localhost:8000/api/documents?subject=${encodeURIComponent(subjectName)}`, {
+      const response = await fetch(`${API_BASE}/api/documents?subject=${encodeURIComponent(subjectName)}`, {
         headers: { 'Authorization': `Bearer ${token}` }
       });
       if (!response.ok) {
@@ -581,7 +587,7 @@ function App() {
     if (!cleaned) return;
 
     try {
-      const response = await fetch('http://localhost:8000/api/subjects', {
+      const response = await fetch(`${API_BASE}/api/subjects`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -632,7 +638,7 @@ function App() {
   const handleLogout = async () => {
     if (token) {
       try {
-        await fetch('http://localhost:8000/api/auth/logout', {
+        await fetch(`${API_BASE}/api/auth/logout`, {
           method: 'POST',
           headers: { 'Authorization': `Bearer ${token}` }
         });
@@ -753,7 +759,7 @@ function App() {
     }
     
     try {
-      const response = await fetch(`http://localhost:8000/api/documents?filename=${encodeURIComponent(docName)}&subject=${encodeURIComponent(currentSubject)}`, {
+      const response = await fetch(`${API_BASE}/api/documents?filename=${encodeURIComponent(docName)}&subject=${encodeURIComponent(currentSubject)}`, {
         method: 'DELETE',
         headers: { 'Authorization': `Bearer ${token}` }
       });
@@ -786,7 +792,7 @@ function App() {
     setQuestionsAsked(prev => prev + 1);
 
     try {
-      const response = await fetch('http://localhost:8000/api/chat', {
+      const response = await fetch(`${API_BASE}/api/chat`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
