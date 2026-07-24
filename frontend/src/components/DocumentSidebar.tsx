@@ -1,6 +1,7 @@
 import React, { useRef, useState } from 'react';
 import { Upload, FileText, Loader2, AlertCircle, RefreshCw, Flame, Award, Zap, Compass, Trophy, CheckCircle2, ListTodo, Plus, Trash2, LogOut } from 'lucide-react';
-import { SubjectTheme, API_BASE } from '../App';
+import type { SubjectTheme } from '../App';
+import { API_BASE } from '../App';
 
 interface DocumentSidebarProps {
   documents: string[];
